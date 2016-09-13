@@ -1,23 +1,42 @@
 var gulp = require('gulp');
 var gutil = require('gulp-util');
 var browserify = require('browserify');
-var browserSyc = require('browser-sync').create();
+var watchify = require('watchify');
+var babelify = require('babelify');
+var browserSync = require('browser-sync').create();
 var source = require('vinyl-source-stream');
 var $ = require('jquery');
 
-gulp.task('browserify', function(){
-	return browserify('./js/main.js')
-			.bundle()
-			.on('error', function(e){
-				gutil.log(e);
-			})
-			.pipe(source('bundle.js'))
-			.pipe(gulp.dest('./build/'))
-			.pipe(browserSyc.stream());
-});
+function bundle(bundler){
+	return bundler
+		.transform(babelify)
+		.bundle()
+		.on('error', function(e){
+			gutil.log(e);
+		})
+		.pipe(source('bundle.js'))
+		.pipe(gulp.dest('./app/js/dist'))
+		.pipe(browserSync.stream());
+}
+
 
 gulp.task('watch', function(){
-	gulp.watch('js/main.js', ['browserify']);
+
+	watchify.args.debug = true;
+
+	var watcher = watchify(browserify('./app/js/main.js'), watchify.args);
+	bundle(watcher);
+
+	watcher.on('update', function(){
+		bundle(watcher);
+	});
+	watcher.on('log', gutil.log);
+
+	browserSync.init({
+        server: "./app",
+        logFileChanges: false
+    });
+
 });
 
-gulp.task('default', ['watch', 'browserify']);
+gulp.task('default', ['watch']);

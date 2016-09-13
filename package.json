@@ -13,16 +13,17 @@
     "gulp": "^3.9.1"
   },
   "devDependencies": {
+    "babelify": "^7.3.0",
     "browser-sync": "^2.15.0",
     "browserify-shim": "^3.8.12",
-    "gulp-util": "^3.0.7"
+    "exorcist": "^0.4.0",
+    "gulp-util": "^3.0.7",
+    "watchify": "^3.7.0"
   },
   "browserify-shim": {
-    "jquery": "$"
+    "jquery": "./node_modules/jquery/dist/jquery.js"
   },
   "browserify": {
-    "transform": [
-      "browserify-shim"
-    ]
+    "jquery": "$"
   }
 }
