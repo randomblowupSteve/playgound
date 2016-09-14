@@ -1,6 +1,13 @@
 var $ = require('jquery');
 
-module.exports = function(name = 'Steve'){
+class Test{
 
-	$("#p1").html(`Hello! My Name is ${name}`);
+	constructor(name){
+		this.name = name;
+	}
+
+	getmyName(){
+		$("#p1").html(`Hello! My Name is ${this.name}`);
+	}
 }
+export default Test;

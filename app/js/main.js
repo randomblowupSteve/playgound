@@ -1,3 +1,5 @@
-var helper = require('./hello');
+import Test from './hello';
 
-helper('Apple Lee');
+
+var test = new Test('Babel');
+test.getmyName();

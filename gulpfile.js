@@ -3,13 +3,15 @@ var gutil = require('gulp-util');
 var browserify = require('browserify');
 var watchify = require('watchify');
 var babelify = require('babelify');
+var uglify        = require('gulp-uglify');
 var browserSync = require('browser-sync').create();
 var source = require('vinyl-source-stream');
+var streamify = require('gulp-streamify');
 var $ = require('jquery');
 
 function bundle(bundler){
 	return bundler
-		.transform(babelify)
+		.transform('babelify', {presets: ['es2015']})
 		.bundle()
 		.on('error', function(e){
 			gutil.log(e);
@@ -37,6 +39,12 @@ gulp.task('watch', function(){
         logFileChanges: false
     });
 
+});
+
+gulp.task('build', function(){
+	return gulp.src("app/js/dist/bundle.js")
+       .pipe(streamify(uglify()))
+       .pipe(gulp.dest('./app/js/product'));
 });
 
 gulp.task('default', ['watch']);
