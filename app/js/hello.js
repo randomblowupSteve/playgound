@@ -1,13 +1,20 @@
-var $ = require('jquery');
+import jQuery from 'jQuery';
+import mixitup from 'mixitup';
 
 class Test{
 
 	constructor(name){
 		this.name = name;
+		
 	}
 
 	getmyName(){
-		$("#p1").html(`Hello! My Name is ${this.name}`);
+		jQuery("#p1").html(`Hello! My Name is ${this.name}`);
+	}
+
+	shuffle(){
+		$('#Container').mixItUp();
 	}
 }
+
 export default Test;

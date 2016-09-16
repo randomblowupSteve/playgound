@@ -25,10 +25,17 @@
     "vinyl-source-stream": "^1.1.0",
     "watchify": "^3.7.0"
   },
-  "browserify-shim": {
-    "jquery": "./node_modules/jquery/dist/jquery.js"
+  "browser": {
+    "jQuery": "./node_modules/jquery/dist/jquery.min.js",
+    "mixitup": "./node_modules/mixitup-master/build/jquery.mixitup.min.js"
   },
   "browserify": {
-    "jquery": "$"
+    "transform": [
+      "browserify-shim"
+    ]
+  },
+  "browserify-shim": {
+    "jQuery": "global:jQuery",
+    "mixitup": { "exports": "mixitup", "depends": "jQuery"}
   }
 }
