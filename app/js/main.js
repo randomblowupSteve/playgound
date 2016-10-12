@@ -1,7 +1,7 @@
-import Test from './hello';
+import myClass from './hello';
 
+var myclass = new myClass('Babel');
+myclass.getmyName();
 
-var test = new Test('Babel');
-test.getmyName();
-
-test.shuffle();
+myclass.shuffle();
+myclass.clock();

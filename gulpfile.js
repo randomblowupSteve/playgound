@@ -7,11 +7,9 @@ var uglify        = require('gulp-uglify');
 var browserSync = require('browser-sync').create();
 var source = require('vinyl-source-stream');
 var streamify = require('gulp-streamify');
-var $ = require('jquery');
 
 function bundle(bundler){
 	return bundler
-		.transform('babelify', {presets: ['es2015']})
 		.bundle()
 		.on('error', function(e){
 			gutil.log(e);
@@ -26,12 +24,14 @@ gulp.task('watch', function(){
 
 	watchify.args.debug = true;
 
-	var watcher = watchify(browserify('./app/js/main.js'), watchify.args);
+	var watcher = watchify(browserify('./app/js/main.js'), watchify.args)
+		.transform('babelify', {presets: ['es2015']});
 	bundle(watcher);
 
 	watcher.on('update', function(){
 		bundle(watcher);
 	});
+	
 	watcher.on('log', gutil.log);
 
 	browserSync.init({

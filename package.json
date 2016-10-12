@@ -27,7 +27,8 @@
   },
   "browser": {
     "jQuery": "./node_modules/jquery/dist/jquery.min.js",
-    "mixitup": "./node_modules/mixitup-master/build/jquery.mixitup.min.js"
+    "mixitup": "./node_modules/mixitup-master/build/jquery.mixitup.min.js",
+    "jclock": "./app/js/vendor/jquery.jclock.js"
   },
   "browserify": {
     "transform": [
@@ -35,7 +36,8 @@
     ]
   },
   "browserify-shim": {
-    "jQuery": "global:jQuery",
-    "mixitup": { "exports": "mixitup", "depends": "jQuery"}
+    "jQuery": "jQuery",
+    "mixitup": { "exports": "mixitup", "depends": "jQuery"},
+    "jclock" : { "exports": "jclock", "depends": "jQuery"}
   }
 }
