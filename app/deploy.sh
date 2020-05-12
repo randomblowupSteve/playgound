@@ -8,7 +8,7 @@ set -e
 
 # navigate into the build output directory
 cd dist
-echo 'hello world au' >> au.text
+echo 'hello world au version file' >> au.text
 
 
 # if you are deploying to a custom domain
