@@ -7,7 +7,7 @@ set -e
 #npm run build
 
 # navigate into the build output directory
-cd css
+cd dist
 echo 'hello world au' >> au.text
 
 
